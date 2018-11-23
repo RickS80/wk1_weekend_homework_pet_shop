@@ -41,3 +41,20 @@ def find_pet_by_name(pet_shop, named_animal)
   end
   return nil
 end
+
+def remove_pet_by_name(pet_shop, name)
+  pet_to_be_deleted = find_pet_by_name(pet_shop, name)
+    pet_shop[:pets].delete(pet_to_be_deleted)
+end
+
+def add_pet_to_stock(pet_shop, new_pet)
+  pet_shop[:pets] << new_pet
+end
+
+def customer_cash(customer)
+  return customer[:cash]
+end
+
+def remove_customer_cash(customer, amount)
+  customer[:cash] -= amount
+end
