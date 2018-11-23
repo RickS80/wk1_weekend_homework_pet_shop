@@ -11,7 +11,7 @@ def add_or_remove_cash(pet_shop, amount)
 end
 
 def pets_sold(pet_shop)
-  return pet_shop[:admin][:pets_sold].to_i
+  return pet_shop[:admin][:pets_sold]
 end
 
 def increase_pets_sold(pet_shop, soldpet)
@@ -74,4 +74,12 @@ def customer_can_afford_pet(customer, new_pet)
     return true
   else false
   end
+end
+
+def sell_pet_to_customer(pet_shop, pet, customer)
+  customer[:pets] << 1
+  customer[:cash] -= 900
+  pet_shop[:admin] = {
+    total_cash: 1900,
+    pets_sold: 1}
 end
