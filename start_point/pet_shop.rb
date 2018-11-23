@@ -97,19 +97,21 @@ end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
 
+
 # when pet exists AND customer has enough cash
-  if customer_cash(customer) > 900
-    # && find_pet_by_name(pet_shop, pet) == [:pets][:name]
+  if  find_pet_by_name(pet_shop,"Arthur") == pet && customer_cash(customer) > 900
       add_pet_to_customer(customer, pet)
       remove_customer_cash(customer, 900)
       increase_pets_sold(pet_shop, 1)
       add_or_remove_cash(pet_shop, 900)
 
 # when pet does not exist or customer does not have enough funds
-elsif customer_cash(customer) < 900
+elsif find_pet_by_name(pet_shop, pet) == nil || customer_cash(customer) < 900
       customer_pet_count(customer)
       pets_sold(pet_shop)
       customer_cash(customer)
       total_cash(pet_shop)
   end
 end
+
+# other improvements : change arthur, cash from customer to variables
