@@ -32,15 +32,17 @@ def pets_by_breed(pet_shop, breed_type)
   return breed_type_array
 end
 
-def find_pet_by_name(pet_shop, named_animal)
+def find_pet_by_name(pet_shop, pet_name)
   # look in the hashes within the pets array to find the name
-  for pet in pet_shop[:pets]
-    if pet[:name] == named_animal
-      return pet
+  for pet_hash in pet_shop[:pets]
+    if pet_hash[:name] == pet_name
+      return pet_hash
     end
   end
   return nil
 end
+
+
 
 def remove_pet_by_name(pet_shop, name)
   pet_to_be_deleted = find_pet_by_name(pet_shop, name)
@@ -76,6 +78,7 @@ def customer_can_afford_pet(customer, new_pet)
   end
 end
 
+
 # def sell_pet_to_customer(pet_shop, pet, customer)
 #         customer[:pets] << pet
 #         customer[:cash] -= 900
@@ -94,17 +97,26 @@ end
 #       add_or_remove_cash(pet_shop, 900)
 # end
 
+# setting a new price methos
+
+def price(pet_shop, pet)
+  for pet_hash in pet_shop[:pets]
+    if pet_hash[:name] == pet
+      return pet_hash[:price]
+    end
+  end
+end
+
 
 def sell_pet_to_customer(pet_shop, pet, customer)
-
-
+    pet_name = find_pet_by_name(pet_shop, "Arthur")[:name]
 
 # when pet exists AND customer has enough cash
-  if  find_pet_by_name(pet_shop,"Arthur") == pet && customer_can_afford_pet(customer, pet) == true
+  if  find_pet_by_name(pet_shop, pet_name) == pet && customer_can_afford_pet(customer, pet) == true
       add_pet_to_customer(customer, pet)
-      remove_customer_cash(customer, 900)
+      remove_customer_cash(customer, price(pet_shop, pet_name))
       increase_pets_sold(pet_shop, 1)
-      add_or_remove_cash(pet_shop, 900)
+      add_or_remove_cash(pet_shop, price(pet_shop, pet_name))
 
 # when pet does not exist or customer does not have enough funds
 elsif find_pet_by_name(pet_shop, pet) == nil || customer_can_afford_pet(customer, pet) == false
@@ -115,4 +127,4 @@ elsif find_pet_by_name(pet_shop, pet) == nil || customer_can_afford_pet(customer
   end
 end
 
-# other improvements : change arthur, include price
+# other improvements : change arthur to variable
